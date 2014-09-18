@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bootstrapbutton="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="选择测试线路" />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/btn1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:text="cdn"
+                bootstrapbutton:bb_icon_right="fa-android"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_type="success" />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/btn2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:text="借用"
+                bootstrapbutton:bb_icon_right="fa-flask"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_type="warning" />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/btn3"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:text="本地"
+                bootstrapbutton:bb_icon_right="fa-question-circle"
+                bootstrapbutton:bb_roundedCorners="true"
+                bootstrapbutton:bb_type="warning" />
+
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="2" >
+
+    <dataSet config="debug" >
+        <source path="D:\testAndroid\Android_NetSpeed\AndroidBootstrap\build\intermediates\bundles\debug\assets" />
+    </dataSet>
+    <dataSet config="main" >
+        <source path="D:\testAndroid\Android_NetSpeed\AndroidBootstrap\src\androidTest\assets" />
+    </dataSet>
+
+</merger>
