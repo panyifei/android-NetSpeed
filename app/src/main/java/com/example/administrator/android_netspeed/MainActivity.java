@@ -1,22 +1,33 @@
 package com.example.administrator.android_netspeed;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.CheckBox;
+import android.widget.Toast;
+
+import com.fourmob.datetimepicker.date.DatePickerDialog;
+import com.fourmob.datetimepicker.date.DatePickerDialog.OnDateSetListener;
+import com.sleepbot.datetimepicker.time.RadialPickerLayout;
+import com.sleepbot.datetimepicker.time.TimePickerDialog;
+
+import java.util.Calendar;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 
 
-public class MainActivity extends Activity{
+public class MainActivity extends FragmentActivity implements TimePickerDialog.OnTimeSetListener{
 
+    public static final String DATEPICKER_TAG = "datepicker";
+    public static final String TIMEPICKER_TAG = "timepicker";
     static MasterLayout masterLayout;   //Should be static
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final BootstrapButton button1 = (BootstrapButton)findViewById(R.id.btn1);
@@ -29,7 +40,7 @@ public class MainActivity extends Activity{
                 button1.setBootstrapType("success");
                 button2.setBootstrapType("warning");
                 button3.setBootstrapType("warning");
-                Log.i("mine","click");
+                Log.i("mine", "click");
                 new DownLoadSigTask().cancel(true);
                 masterLayout.reset();
             }
@@ -58,7 +69,6 @@ public class MainActivity extends Activity{
 
         masterLayout = (MasterLayout) findViewById(R.id.MasterLayout01);
 
-        //Onclick listener of the progress button
         masterLayout.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -78,6 +88,25 @@ public class MainActivity extends Activity{
                 }
             }
         });
+
+        //这里是时间选择
+        final Calendar calendar = Calendar.getInstance();
+        final TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY) ,calendar.get(Calendar.MINUTE), false, false);
+
+        findViewById(R.id.timeButton).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePickerDialog.show(getSupportFragmentManager(), TIMEPICKER_TAG);
+            }
+        });
+
+        if (savedInstanceState != null) {
+
+           TimePickerDialog tpd = (TimePickerDialog) getSupportFragmentManager().findFragmentByTag(TIMEPICKER_TAG);
+            if (tpd != null) {
+                tpd.setOnTimeSetListener(this);
+            }
+        }
     }
 
     static class DownLoadSigTask extends AsyncTask<String, Integer, String> {
@@ -104,5 +133,12 @@ public class MainActivity extends Activity{
             masterLayout.cusview.setupprogress(progress[0]);
         }
 
+    }
+
+
+    //这里是时间选择
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+        Toast.makeText(MainActivity.this, "new time:" + hourOfDay + "-" + minute, Toast.LENGTH_LONG).show();
     }
 }
